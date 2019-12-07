@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.use("/:id/comments", comments);
 
+const date = new Date().toLocaleString();
+
 router.get("/", async (req, res) => {
   try {
     const getPosts = await db.find();
@@ -29,7 +31,6 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const date = new Date().toLocaleString().replace("/", "-");
   const body = {
     title: req.body.title,
     contents: req.body.contents,
@@ -63,11 +64,6 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const date = new Date()
-    .toLocaleString()
-    .split("")
-    .replace(new RegExp("/", "g"), "-")
-    .join("");
   const updateBody = {
     title: req.body.title,
     contents: req.body.contents,

@@ -5,6 +5,8 @@ const router = express.Router({
   mergeParams: true
 });
 
+const date = new Date().toLocaleString();
+
 router.get("/", async (req, res) => {
   let findComment = await db.findPostComments(req.params.id);
   try {
@@ -19,7 +21,6 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const date = new Date().toLocaleString().replace("/", "-");
   try {
     let commentBody = {
       text: req.body.text,
